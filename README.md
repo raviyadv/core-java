@@ -1,2 +1,2 @@
 # core-java
-repository contains good core java projects.
+repository contains good core java example.
