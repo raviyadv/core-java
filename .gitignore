@@ -1,0 +1,7 @@
+#Ignore all files
+*.idea/
+**/core-java.iml
+**/file_folder/
+**/out/
+
+s
