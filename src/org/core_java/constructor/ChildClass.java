@@ -11,6 +11,7 @@ public class ChildClass extends ParentClass{
 
     public static void main(String[] args) throws Exception{
         ChildClass childClass=new ChildClass();
-
+     int    i=20;
+        System.out.println(i);
     }
 }
