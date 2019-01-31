@@ -10,7 +10,6 @@ public class TestWildCard {
         A a = new A();
         B b = new B();
         C c = new C();
-
         aType.add(a);
         aType.add(b);
         aType.add(c);
