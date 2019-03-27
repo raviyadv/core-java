@@ -1,7 +1,6 @@
 package edu.java.practise.java8.java8_in_action.chapter1.solu;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Test {
