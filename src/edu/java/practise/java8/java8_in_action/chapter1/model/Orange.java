@@ -1,8 +1,15 @@
-package edu.java.practise.java8.java8_in_action.chapter1;
+package edu.java.practise.java8.java8_in_action.chapter1.model;
 
-public class Orange implements  Fruits{
-    String color;
-    int weight;
+import java.util.Objects;
+
+public class Orange {
+    private String color;
+    private int weight;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, weight);
+    }
 
     public Orange(String color, int weight) {
         this.color = color;
@@ -10,7 +17,6 @@ public class Orange implements  Fruits{
     }
 
     public String getColor() {
-
         return color;
     }
 
@@ -24,6 +30,15 @@ public class Orange implements  Fruits{
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Orange orange = (Orange) o;
+        return weight == orange.weight &&
+                Objects.equals(color, orange.color);
     }
 
     @Override
