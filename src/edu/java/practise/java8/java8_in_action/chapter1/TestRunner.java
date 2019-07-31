@@ -5,9 +5,7 @@ import edu.java.practise.java8.java8_in_action.chapter1.model.Orange;
 import edu.java.practise.java8.java8_in_action.chapter1.service.Filter;
 import edu.java.practise.java8.java8_in_action.chapter1.serviceiml.AppleFilterImpl;
 import edu.java.practise.java8.java8_in_action.chapter1.serviceiml.OrangeFilerImpl;
-
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,6 +18,9 @@ public class TestRunner {
         List filteredApple=getFilteredListStatic(appleList, new AppleFilterImpl());
         List filteredOrange=getFilteredListStatic(orangeList, new OrangeFilerImpl());
 
+        System.out.println("Data of Apple:: "+filteredApple);
+        System.out.println("Data of Orange:: "+filteredOrange);
+        System.out.println("----------------------------------");
         //method reference call of java 8
         //System.out.println(new TestRunner().getFilteredListNonStatic(appleList,AppleFilterImpl::test));
 
@@ -27,18 +28,23 @@ public class TestRunner {
         // here we are not able to create Filter object as lambda expression because compiler always
         // try to solve the lambda type of object on the basis of the cally function list type, here list
         // type of getFilteredListStatic is non generic list, so here we are not able to create Filter Predicate object
-        System.out.println(getFilteredListStatic(appleList, new Filter() {
+        System.out.println("List not generic so lambda not being applied:: "+getFilteredListStatic(appleList, new Filter() {
             @Override
             public boolean test(Object o) {
-                return true;
+                return false;
             }
         }));
 
         // now we change the type of List to generic list and it is working fine now
-        System.out.println(getFilteredListFilterPredicate(appleList,(apple)->apple.getColor().equalsIgnoreCase("Green")));
+        System.out.println("Lambda :: "+getFilteredListFilterPredicate(appleList,(apple)->apple.getColor().equalsIgnoreCase("Green")));
 
-        System.out.println(filteredApple);
-        System.out.println(filteredOrange);
+        //method reference
+        System.out.println("Method Reference:: "+getFilteredListFilterPredicate(appleList,new AppleFilterImpl()::test));
+
+        // another way to filtering by java stream api - which use fork and join methodology
+        System.out.println("Stream sequential:: "+appleList.stream().filter(apple -> "Red".equalsIgnoreCase(apple.getColor())).collect(Collectors.toList()));
+        System.out.println("Stream parallel:: "+orangeList.parallelStream().filter(orange -> orange.getWeight()>150).collect(Collectors.toList()));
+
     }
 
     /**
